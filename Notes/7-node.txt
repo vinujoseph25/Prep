@@ -1,0 +1,26 @@
+why no import in node js
+db attacks, rate limiting
+maintain sessions
+JWT
+	-parts
+	-making
+ssl
+server cachings 
+	-api cachings
+	-compression gzip
+	-image format
+webpack in node js
+	-uglification
+	-minification
+db connnections, orm sequelize, models, stored procedures-> stored as binaries so faster
+event loops
+	-order of execution
+	-timers?
+	-micro tasks vs macro tasks
+	-execution context and stack
+import vs import() -> no hoisting
+common.js and module loader
+api performance
+	gzip
+	promise
+	spliting

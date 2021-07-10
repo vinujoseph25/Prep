@@ -1,0 +1,27 @@
+css library, proproccessors, version
+sass,less
+
+Box Sizing
+-Content
+-Padding
+-Border
+-Margin
+
+Specificity-css selection wen multiple styles are there for the same elements
+!important>Id>Class>normal
+
+Align inner withing outer
+-Outer:position: relative;
+-Inner:position: absolute;top: 50%;left: 50%;transform: translate(-50%, -50%);
+
+Diff bw Static/Relative/Absolute/Fixed Position
+-Static:normal
+-Relative:witout disturbing other elements
+-Absolute:behaves like the applied element not present
+-Fixed:Position doesnt change even if scrolled
+
+visibility hidden vs display:none
+visible hidden : the Content is hidden, but space is there in DOM
+display : none : the whole elements is not present in DOM
+
+Shadow DOM

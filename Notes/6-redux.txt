@@ -1,0 +1,15 @@
+redux concepts (three simple principles)
+    single source of truth - The state of your whole application is stored in a single object
+    State Is Read-Only - emit actions to change the state (type,payload, error (Any optional boolean property set to true if the action represents an error), meta(Meta can be any type of value. It is intended for any extra information that is not part of the payload))
+    State Is Changed with Pure Functions
+filter reducers
+selectors
+rendering user interface
+dev tools
+setting up hot reloading
+testing redux
+react router with redux
+middleware
+thunk vs saga
+redux toolkit
+immutable helpers

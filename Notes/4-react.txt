@@ -1,0 +1,231 @@
+Virtual DOM
+-Is an abstraction of the HTML DOM. It is detached from the browser-specific implementation details.
+-When state changes in a component -> runs a “DIFFING” algorithm, which identifies what has changed in the virtual DOM.
+-The second step is RECONCILIATION, where it updates the DOM with the results of diff.
+
+JSX
+-JSX is a syntax extension to JavaScript
+
+Generate React Component
+-React.createClass (old) & extends React.Component(ES6)
+
+ReactDOM vs React
+-ReactDOM : Mounting->render() & Find where the component was rendered->findDOMNode()
+-React	  : Define and create Elements/Components, Lifecycle hooks
+
+Props vs State
+-Props	: Immutable, pass data parent->child / component itself, it can be data/callback fns.
+-State	: Mutable, internally used, particularlly used for user input & modal toggle.
+
+setState()
+-SetState calls are asynchronous as well as batched for better UI experience and performance.
+-An expensive operation and making it synchronous might leave the browser unresponsive.
+-2nd argument for setState() is a callback fn, which is called immediately when setState is completed.
+Different setState
+-this.setState({counter :1});
+-this.setState((prevState,props)=>{return({counter:prevState.couter+props.newValue});});
+-this.setState({counter :1},()=>{console.log("state is set");});							//callback
+
+render()
+-Returns a single React element which is the representation of the native DOM component
+-If there are more child elements, then it should be inside the enclosing tag eg. <div>
+-Putting more enclosing tags can cause issue in stlying, so FRAGMENTS are used. (React.Fragments)
+
+Lifecycle Methods
+
+
+Class vs Functional Component
+-Class		: If State/Lifecycle hooks/Store required
+	Pure Component  increases the performanance, only updates if state has changed, no ComponentShouldUpdate LC method.
+-Functional : If State/Lifecycle hooks/Store not required, only receives props and renders to page
+	Called (stateless/ dumb/ presentational components)
+	
+PureComponent
+-Pure Components in React are the components which do not re-renders when the value of state and props has been updated with the same values.
+-handles the shouldComponentUpdate method itself, does a shallow comparison on both props and state.
+-Preferred  to use when the compoent re-rendering depends only on its state and props, not matter the parent props change.
+-Normal comp re-renders every time when its parent re-renders, Pure Comp only re-renders wen its props or state changes.
+works like -> returns (!ShallowComparison(oldProps,NewProps) || !ShallowComparison(oldState,NewState))
+
+Controlled vs Uncontrolled Components
+-Controlled	:	Takes current value through props and notifies changes through callbacks like onChange
+				Form element whose value is controlled by React.
+				Every state mutation will have an associated handler fns / Callback fns.
+				Helps to modify or validate user input.
+-Uncontrolled :	Form elements controlled by DOM
+				Updation/changing is not controlled, only after submit
+				Stores its own state internally, and you query the DOM using a ref to find its current value when you need it.
+				This is a bit more like traditional HTML
+
+Virtual-DOM vs Dirty checking
+-Dirty Check : Dirty checking slower than observables
+			   Pull data at a regular interval and check all of the values in the data structure recursively.
+-Virtual DOM : Observable to check if the state has changed is an efficient way to prevent unnecessary re-renders.
+
+Optimizing the Code
+-Prevent re-rendering (shouldComponentUpdate). Use arrow fns.
+-Code splitting, lazy loads -> uses Suspense as fallback, when lazy component is not loaded.
+
+Error boundaries
+-Lifecycle methods : static getDerivedStateFromError -> componentDidCatch
+
+React Patterns
+-
+
+ES6 vs ES5
+-Arrow fns			:	Reduces the code, 'this' references to class parameter  than the instance, high performanance
+-Objects manupulation :	Spread operator, Object defining & destructing
+-Callbacks			:	Promise : resolves->then block. rejects->catch block.
+-Export&Imports		:	Morw readability	
+
+Prop types
+-Way to know what type of props a component is expecting.
+-if not used properly results in console warining
+
+Babel & Webpack
+-Babel is used for backward compactability for ES5/6/6+
+-Webpack used as a module bundler and task runner in react js , others can be also used. But Webpack widely used/
+
+Binding Fns needed?
+-if you dont bind fns, the 'this' keyword inside the fns will not be pointing to the class instance.
+-3 ways to tackle the issue.
+-bind the fn inside the constructor
+-use arrow fn to call the fn eg. '()=>{fn()}'
+- fn definition shud be like arror fns eg. 'fn = ()=>{}'
+
+Key in react map of arrays ???
+-to track the individal child comps for DOM changes
+
+Optimizing without create-react-app
+-adding the actual plugins
+-capturing the source map
+-analyzing the bundle size
+-lazy loading   creat-react-app
+
+Hooks : Are used to create functional cmp that uses state and LifeCycle methods.
+-useState	: State : const [age, setAge] = useState(0); : 1st arg is the state & 2ns arg is the fn to setState
+-useEffect	: LifeCycle methods :   
+			useEffect(() => { }, []); empty [] for mount phase 	//to run it only once
+			useEffect(() => { }); for mount and update phase & useEffect(() => { }, [state]); for changes of state.
+			useEffect(() => { return ()=>{ dummyFn(); } }); dummyFn() will be called before unMounting
+-useSelector	: get value from store : const age = useSelector(state => state.age);
+-useDispatch	: to dispatch actions to the reducer : const dispatch = useDispatch();
+
+Higher order component
+-Is a pattern where function takes component as an argument and returns a new component.
+-Eg: const NewComp = higherOrderComp(originalComp)
+-Used for reusing component logic
+-Best way to share behavior between React Components
+-Eg. Redux’s connect function
+
+Render Props
+A technique for "SHARING CODE" between React components using a "PROPS WHOSE VALUE IS A FUNCTION".
+A render prop is a function prop that a component uses to know what to render
+
+React.cloneElement
+-Clone and return a new React element using the passed element as the starting point
+-Has original element's props with the new props merged in shallowly
+
+this.props.children
+-this.props.children :	Used to display whatever you include between the opening and closing tags of the child comp, when invoking a component from the parent.
+const Picture = (props) => {
+  return (
+    <div>
+      <img src={props.src}/>
+      {props.children}
+    </div>
+  )
+}
+<Picture key={picture.id} src={picture.src}>
+          //what is placed here is passed as props.children  
+</Picture>
+
+Context Api
+- solves prop drilling
+1.Initialize the Context: 	React.createContext() : const { Provider, Consumer } = React.createContext();
+2.Create the Provider	: 	class MyProvider extends Component {
+							  render() {
+								return <Provider value={{ name: "Vinu" }}>{this.props.children}</Provider>;
+							  }
+							}
+							Place wer the data lives, enclose the main in <MyContext.Provider value=""></MyContext.Provider>
+3.Create the Consumer	: 	Used in place wer data need to be accessed, wrap the place wer we want to use the data with
+							<Consumer>{context => <p>Hi my name is {context.name}</p>}</Consumer>
+
+Enzyme
+Reselector
+
+React Native vs React
+-React Native is a mobile framework that compiles to native app components, allowing us to build native mobile applications in JS.
+-React is a JavaScript library, supporting both front end web and being run on the server.
+
+Redux
+-Is a predictable state container for JavaScript apps. (Actions,Reducer,Store)
+-createStore(x) : x is the Reducer
+-ACTION :	App dispatches actions to update the state with/without payloads.
+			store.dispatch()
+-REDUCER: 	Reducer returns a fresh instance of the state
+			Specify how the application’s state changes in response to actions sent to the store
+			Takes 2 arguments : State & Action
+-STORE	:	Store notifies the app and re-render accordingly.
+			Allows access to state via getState()
+			Allows state to be updated via dispatch(action)
+			Registers listeners via subscribe(listener)
+-Alternative of Redux : MobX(new), RxJS (Reactive Extensions for JavaScript)
+-Built in PubSub pattern
+
+**Store**
+const combineReducer = combineReducers({rA: reducerA,rB: reducerB});   //multiple reducers
+const store = createStore(reducer);
+<Provider store={store}><App /></Provider>
+mapStateToProps,mapDispatchToProps
+connect()
+
+**Middleware**
+const store = createStore(reducer, applyMiddleware(thunk));
+
+Redux Thunk
+-Action creators that return a function instead of an action
+-To handle the asyncronous dispatching of actions(asyncronous api calls).
+-Inner function receives the store methods 'dispatch' & 'getState' as parameters.
+-applyMiddleware(thunk) is used
+
+paginations, any packages used
+increase performance
+	windowing,
+	lazy loading,
+	code spliting
+	mfe
+	bundle size
+performance check -  profiler, memory leaks
+screen freezing issues and react window
+pure fns, fn components
+use memo, memo
+deepclone and immmutable helpers
+HOC vs HOC fns
+reconcliation
+react fiber -> incremental rendering
+hooks
+	use memo
+	use callbacks
+SSR
+cros issues, fix
+react router
+hash router types 3
+render steps
+	render tree create
+	repainting
+unit testing
+Presentational components
+Container components
+Context APIs
+property validation
+
+Hooks
+	useArray
+	use-form-state
+	fetch-hooks
+	useMedia
+	use-portal
+	use-location
+	use-redux

@@ -1,0 +1,54 @@
+dom events
+html versions
+order of execution flow
+	The HTML document gets downloaded
+	The parsing of the HTML document starts
+	HTML Parsing reaches <script src="jquery.js" ...
+	jquery.js is downloaded and parsed
+	HTML parsing reaches <script src="abc.js" ...
+	abc.js is downloaded, parsed and run
+	HTML parsing reaches <link href="abc.css" ...
+	abc.css is downloaded and parsed
+	HTML parsing reaches <style>...</style>
+	Internal CSS rules are parsed and defined
+	HTML parsing reaches <script>...</script>
+	Internal Javascript is parsed and run
+	HTML Parsing reaches <img src="abc.jpg" ...
+	abc.jpg is downloaded and displayed
+	HTML Parsing reaches <script src="kkk.js" ...
+	kkk.js is downloaded, parsed and run
+	Parsing of HTML document ends
+
+node hierarchy -> 
+	DOM
+		html
+			head->title
+			body->elements
+selector apis ->Document.querySelector()
+browser scripts loading 3 methods-> 	
+	simple-downloaded and exected sycn for each
+	defer-the file gets downloaded asynchronously, but executed only when the document parsing is completed. With defer, scripts will execute in the same order as they are called
+	async- he file gets downloaded asynchronously, exected asynchronously, no blocking for render, dynamic scripting is async by default-> create script element, load script to src, do something on script onload
+
+
+Styles linking to HTML
+-Inside the head tag with <link>
+
+Doctype
+-to tell teh version of html to browser, done for proper rendering of webpage
+
+RWD
+-Using Media Query or Bootstrap
+
+Viewport
+visible area of the webpage in the device rendered
+
+Positioning in CSS
+-Static/Relative/Absolute/fixed/Sticky
+
+z-index
+-change the z position of the elements
+
+let var
+closure
+Closure gives access to an outer fn's scope from the inner fn. 

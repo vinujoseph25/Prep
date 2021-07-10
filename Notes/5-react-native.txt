@@ -1,0 +1,32 @@
+Interaction Manager
+Is a native module responsible for deffering the execution of a untill an "interaction" is finished.Avoid frame drop as in RN has only one thread to update UI.
+
+In react native the UI elements are mapped to the native view and it maintains a bridge which allows the JS runtime to communicate asynchronously with the native runtime.
+
+Stylesheet.create
+creates an immutable stylesheet reference, avoiding user to create a new style object in every render pass and only once send across the asynchronous bridge.
+
+Increase performance of an Animation
+We have to serialize the animation before sending it to (asynchronus bridge) native layer before starting.
+Animation.timing() and LayoutAnimations to increase the performance
+JS thread will be blocked wen animation starts, which makes the animation smooth
+
+All communications bw the JS and the native layer has to be done using either callbacks/promise/await as the bridge is asynchronous.
+
+React Native
++works more natively, than rendering in webview like others (cordova/ionic)
+-non access to native UI elements, so look and feel less as compared to native apps
++react runs on separate thread from the main UI thread, so high performance
+
+REFs can be used to access the DOM elements directly. It can be used to Class Comp or Funtional Comp(using closures in JS).
+
+Why api calls in componentDidMount() ?
+-componentWillMount will be soon removed in later releases
+-componentWillMount called twice if it is been rendered from server (1 server-side and 1 client-side)
+-if api call gets resolved before mounting the component, then the callback of the api will try to setState on unmounted component.
+
+Prod release or RN apps
+iOS:Edit scheme->select release instead of debug
+Andriod:--variant=release and take care of signing
+
+

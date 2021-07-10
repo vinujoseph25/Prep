@@ -1,0 +1,5 @@
+complied to vanila JS using TS complier.
+three primitive types that are frequently used: string, number, and boolean.
+Unknown type : you can assign anything to the unknown, but the unknown isn’t assignable to anything but itself and any
+enum
+interfaces
