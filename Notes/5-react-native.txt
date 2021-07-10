@@ -30,3 +30,5 @@ iOS:Edit scheme->select release instead of debug
 Andriod:--variant=release and take care of signing
 
 
+bridge between the OS and React Native
+https://alexmngn.medium.com/from-reactjs-to-react-native-what-are-the-main-differences-between-both-d6e8e88ebf24

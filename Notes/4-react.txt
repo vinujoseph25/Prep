@@ -32,7 +32,28 @@ render()
 -Putting more enclosing tags can cause issue in stlying, so FRAGMENTS are used. (React.Fragments)
 
 Lifecycle Methods
-
+	Mounting
+		constructor()
+		static getDerivedStateFromProps()
+		render()
+		componentDidMount()
+	Update
+		static getDerivedStateFromProps()
+		shouldComponentUpdate()
+		render()
+		getSnapshotBeforeUpdate()
+		componentDidUpdate()
+	unMounting
+		componentWillUnmount()
+	Error handling
+		static getDerivedStateFromError()
+		componentDidCatch()
+	Component APIs
+		setState()
+		forceUpdate()
+Instance Properties
+	props
+	state
 
 Class vs Functional Component
 -Class		: If State/Lifecycle hooks/Store required
@@ -67,16 +88,21 @@ Optimizing the Code
 -Code splitting, lazy loads -> uses Suspense as fallback, when lazy component is not loaded.
 
 Error boundaries
--Lifecycle methods : static getDerivedStateFromError -> componentDidCatch
+	Lifecycle methods
+		static getDerivedStateFromError(error)  // Update state so the next render will show the fallback UI.
+		componentDidCatch(error, errorInfo)	// You can also log the error to an error reporting service
+	Error boundaries do not catch errors for:
+		Event handlers (learn more) -> use try catch
+		Asynchronous code (e.g. setTimeout or requestAnimationFrame callbacks)
+		Server side rendering
+		Errors thrown in the error boundary itself (rather than its children)
 
 React Patterns
--
-
-ES6 vs ES5
--Arrow fns			:	Reduces the code, 'this' references to class parameter  than the instance, high performanance
--Objects manupulation :	Spread operator, Object defining & destructing
--Callbacks			:	Promise : resolves->then block. rejects->catch block.
--Export&Imports		:	Morw readability	
+	-compound-component
+	-control-props
+	-custom-hooks
+	-props-getters
+	-state-reducer
 
 Prop types
 -Way to know what type of props a component is expecting.
@@ -103,13 +129,29 @@ Optimizing without create-react-app
 -lazy loading   creat-react-app
 
 Hooks : Are used to create functional cmp that uses state and LifeCycle methods.
+https://i.stack.imgur.com/7q1jC.jpg
+https://reactjs.org/docs/react-api.html
 -useState	: State : const [age, setAge] = useState(0); : 1st arg is the state & 2ns arg is the fn to setState
--useEffect	: LifeCycle methods :   
-			useEffect(() => { }, []); empty [] for mount phase 	//to run it only once
-			useEffect(() => { }); for mount and update phase & useEffect(() => { }, [state]); for changes of state.
-			useEffect(() => { return ()=>{ dummyFn(); } }); dummyFn() will be called before unMounting
+-useEffect	: LifeCycle methods :  
+			useEffect(() => { }); for mount and update phase	Similar to componentDidMount and componentDidUpdate:
+			useEffect(() => { }, []); empty [] for mount phase, to run it only once
+			useEffect(() => { }, [state]); for changes of state.
+			useEffect(() => { return ()=>{ dummyFn(); } }, []); dummyFn() will be called before unMounting
 -useSelector	: get value from store : const age = useSelector(state => state.age);
 -useDispatch	: to dispatch actions to the reducer : const dispatch = useDispatch();
+
+Basic Hooks
+	useState
+	useEffect
+	useContext
+Additional Hooks
+	useReducer
+	useCallback
+	useMemo
+	useRef
+	useImperativeHandle
+	useLayoutEffect
+	useDebugValue
 
 Higher order component
 -Is a pattern where function takes component as an argument and returns a new component.
@@ -117,6 +159,10 @@ Higher order component
 -Used for reusing component logic
 -Best way to share behavior between React Components
 -Eg. Redux’s connect function
+
+React Memo
+React.memo only checks for prop changes.
+If your function component wrapped in React.memo has a useState, useReducer or useContext Hook in its implementation, it will still rerender when state or context change.
 
 Render Props
 A technique for "SHARING CODE" between React components using a "PROPS WHOSE VALUE IS A FUNCTION".
@@ -141,16 +187,18 @@ const Picture = (props) => {
 </Picture>
 
 Context Api
-- solves prop drilling
-1.Initialize the Context: 	React.createContext() : const { Provider, Consumer } = React.createContext();
-2.Create the Provider	: 	class MyProvider extends Component {
-							  render() {
-								return <Provider value={{ name: "Vinu" }}>{this.props.children}</Provider>;
-							  }
-							}
-							Place wer the data lives, enclose the main in <MyContext.Provider value=""></MyContext.Provider>
-3.Create the Consumer	: 	Used in place wer data need to be accessed, wrap the place wer we want to use the data with
-							<Consumer>{context => <p>Hi my name is {context.name}</p>}</Consumer>
+	solves prop drilling
+Initialize the Context
+	const currentContext = React.createContext();
+Create the Provider and assign value to it.
+	const { Provider } = currentContext; Place wer the data lives, enclose the main in <Provider value={obj}></Provider>
+Get the context usgin useContext hooks Used in place wer data need to be accessed,
+		const contextData = useContext(userDetailContext);
+		<SomeComponent>{contextData.someValue}</SomeComponent>
+
+useReducer
+	const [state, dispatch] = useReducer(reducer, initialState, init); init is a function not an Object
+	 initial state lazily. To do this, you can pass an init function as the third argument
 
 Enzyme
 Reselector
@@ -229,3 +277,6 @@ Hooks
 	use-portal
 	use-location
 	use-redux
+
+
+Design Principles of react https://reactjs.org/docs/design-principles.html

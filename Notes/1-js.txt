@@ -5,6 +5,11 @@ This, Bind, Call, and Apply in JavaScript
 	D:\Personal\POC\Js\JS-Concepts\test\call-apply-bind.js
 es6 features
 	arrow fns vs regular fns see egs D:\Personal\POC\Js\JS-Concepts\test\arrowfn.js
+ES6 vs ES5
+  -Arrow fns			:	Reduces the code, 'this' references to class parameter  than the instance, high performanance
+  -Objects manupulation :	Spread operator, Object defining & destructing
+  -Callbacks			:	Promise : resolves->then block. rejects->catch block.
+  -Export&Imports		:	Morw readability	  
 variable Hoisting
 var, let, const
 	Keyword	Scope		Hoisting	Reassigned	Redeclared
