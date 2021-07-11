@@ -1,2 +1,54 @@
-deisgn patterns
 observables
+
+React Patterns
+    Common props
+    State machine
+    Compound component
+    Render props
+    Higher order compoents
+    Context API
+    Presentational and Container Components
+
+    control-props
+    custom-hooks
+    props-getters
+    state-reducer
+    stateless functions
+    controlled components
+    conditional rendering
+    react hooks
+    Dependency injection with React
+
+Common props
+    <Button {...props} color="black" /> -> 
+    React.creatElement('Button', {
+        ...props,
+        color:black
+    })
+    React.createElement(
+    type,
+    [props],
+    [...children]
+    )
+    <MyButton color="blue" shadowSize={2}>
+    Click Me
+    </MyButton>
+    React.createElement(
+    MyButton,
+    {color: 'blue', shadowSize: 2},
+    'Click Me'
+    )
+
+State Machine
+    use correct value for the state
+    understand the states and handle them properly using either setstate or useReducer, 
+    helps to handle the error in the code efficently.
+
+Compound component
+    <SomeComponent>
+        <SomeChildOne/>
+        <SomeChildTwo>
+            {children}
+        </SomeChildTwo>
+    </SomeComponent>
+    Pass the data with the compounding components using React Children and cloneElement()

@@ -97,13 +97,6 @@ Error boundaries
 		Server side rendering
 		Errors thrown in the error boundary itself (rather than its children)
 
-React Patterns
-	-compound-component
-	-control-props
-	-custom-hooks
-	-props-getters
-	-state-reducer
-
 Prop types
 -Way to know what type of props a component is expecting.
 -if not used properly results in console warining
@@ -131,14 +124,26 @@ Optimizing without create-react-app
 Hooks : Are used to create functional cmp that uses state and LifeCycle methods.
 https://i.stack.imgur.com/7q1jC.jpg
 https://reactjs.org/docs/react-api.html
--useState	: State : const [age, setAge] = useState(0); : 1st arg is the state & 2ns arg is the fn to setState
+-useState : const [age, setAge] = useState(0); : 1st arg is the state & 2ns arg is the fn to setState
+-useState : const [age, setAge] = useState(()=>0); Lazy initial state either a value as arg or fn which returns a value, if the arg is a fn then it gets called only once.
+	const [age, setAge] = useState(callSomeFnForValue()); vs const [age, setAge] = useState(callSomeFnForValue); 1st one is a value as arg and 2nd is a fn as arg
 -useEffect	: LifeCycle methods :  
 			useEffect(() => { }); for mount and update phase	Similar to componentDidMount and componentDidUpdate:
 			useEffect(() => { }, []); empty [] for mount phase, to run it only once
 			useEffect(() => { }, [state]); for changes of state.
 			useEffect(() => { return ()=>{ dummyFn(); } }, []); dummyFn() will be called before unMounting
+			useEffect(() => { return ()=>{ dummyFn(); } }, [variable]); dummyFn() will be called before updating the UI coz of variable
+			useEffect(() => { return ()=>{ dummyFn(); } }); dummyFn() will be called before updating for all UI changes
 -useSelector	: get value from store : const age = useSelector(state => state.age);
 -useDispatch	: to dispatch actions to the reducer : const dispatch = useDispatch();
+
+async with useEffect -> 
+useEffect(() => { 
+	async function fn () {
+		//do something with await
+	}
+	fn();
+}, []);
 
 Basic Hooks
 	useState
@@ -152,6 +157,16 @@ Additional Hooks
 	useImperativeHandle
 	useLayoutEffect
 	useDebugValue
+
+useReducer
+	const [state, dispatch] = useReducer(reducer, initialState, init); init is a function not an Object (Lazy initial)
+	 initial state lazily. To do this, you can pass an init function as the third argument
+useCallback
+	Returns a memoized callback.
+	useCallback(fn, deps) is equivalent to useMemo(() => fn, deps)	 similar to shouldComponentUpdate
+useMemo
+	Returns a memoized value.
+	useCallback(fn, deps) is equivalent to useMemo(() => fn, deps)	 similar to shouldComponentUpdate
 
 Higher order component
 -Is a pattern where function takes component as an argument and returns a new component.
@@ -196,9 +211,6 @@ Get the context usgin useContext hooks Used in place wer data need to be accesse
 		const contextData = useContext(userDetailContext);
 		<SomeComponent>{contextData.someValue}</SomeComponent>
 
-useReducer
-	const [state, dispatch] = useReducer(reducer, initialState, init); init is a function not an Object
-	 initial state lazily. To do this, you can pass an init function as the third argument
 
 Enzyme
 Reselector
@@ -222,12 +234,15 @@ Redux
 -Alternative of Redux : MobX(new), RxJS (Reactive Extensions for JavaScript)
 -Built in PubSub pattern
 
-**Store**
-const combineReducer = combineReducers({rA: reducerA,rB: reducerB});   //multiple reducers
-const store = createStore(reducer);
-<Provider store={store}><App /></Provider>
-mapStateToProps,mapDispatchToProps
-connect()
+**Redux in React 4 steps**
+	create a reducer
+		const combineReducer = combineReducers({rA: reducerA,rB: reducerB});   //multiple reducers
+	create a store
+		const store = createStore(combineReducer, preloadedState,applyMiddleware(middleware));
+	Wrap the app within the Provider from redux	
+		<Provider store={store}><App /></Provider>
+	Connect the compoent to redux using connect() HOC
+		Container = connect(mapStateToProps, mapDispatchToProps)(Component);	
 
 **Middleware**
 const store = createStore(reducer, applyMiddleware(thunk));
@@ -238,24 +253,24 @@ Redux Thunk
 -Inner function receives the store methods 'dispatch' & 'getState' as parameters.
 -applyMiddleware(thunk) is used
 
+import {  BrowserRouter as Router,  Switch,  Route,  Link } from "react-router-dom";
+React router
+	<Router>
+		Switch>
+			<Route
+
 paginations, any packages used
 increase performance
 	windowing,
 	lazy loading,
-	code spliting
+	code spliting, Route-based code splitting
 	mfe
 	bundle size
 performance check -  profiler, memory leaks
 screen freezing issues and react window
 pure fns, fn components
-use memo, memo
 deepclone and immmutable helpers
-HOC vs HOC fns
-reconcliation
 react fiber -> incremental rendering
-hooks
-	use memo
-	use callbacks
 SSR
 cros issues, fix
 react router
