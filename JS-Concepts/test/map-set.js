@@ -15,3 +15,7 @@ unique.forEach((element) => {
 unique.map((element) => {
   console.log(element);
 });
+
+function myFunction() {
+  alert("I am an alert box!");
+}

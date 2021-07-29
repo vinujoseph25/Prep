@@ -271,6 +271,14 @@ screen freezing issues and react window
 pure fns, fn components
 deepclone and immmutable helpers
 react fiber -> incremental rendering
+	 requestIdleCallback() ->global function that can be used to queue a function to be called during a browser’s idle periods.
+	 React had to re-implement the algorithm for walking the tree from the synchronous recursive model that relied on the built-in stack to 
+	 an asynchronous model with linked list and pointers.
+	 	Incremental Rendering :- React v16.0 includes a completely rewritten server renderer. It’s really fast. It supports streaming, so you can start sending bytes to the client faster
+		Handle errors in the render API : To make class component an error boundary we define a new lifecycle method called componentDidCatch(error, info).
+		Return multiple elements from render : With this new feature in React v16.0 now we can also return an array of elements, and string from component’s render method.
+		Portals : Portals provide a first-class way to render children into a DOM node that exists outside the DOM hierarchy of the parent component.
+		Fragments : A common pattern in React is for a component to return multiple elements. Fragments let you group a list of children without adding extra nodes to the DOM.
 SSR
 cros issues, fix
 react router

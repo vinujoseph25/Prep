@@ -1,6 +1,6 @@
 React
-    fiber
-    unit testing
+fiber
+unit testing
     render steps
         render tree create
         repainting
@@ -9,11 +9,11 @@ Redux
     redux toolkit
     immutable helpers        
 TS
-    tuple
-    enum
-    interfaces
+tuple
+enum
+interfaces
 Node
-    EventLoop
+EventLoop
 JavaScript    
     closures
 CSS
