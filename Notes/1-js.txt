@@ -10,16 +10,22 @@ ES6 vs ES5
   -Objects manupulation :	Spread operator, Object defining & destructing
   -Callbacks			:	Promise : resolves->then block. rejects->catch block.
   -Export&Imports		:	Morw readability	  
-variable Hoisting
-var, let, const
-	Keyword	Scope		Hoisting	Reassigned	Redeclared
-	var		Function	Yes			Yes			Yes
-	let		Block 		No			Yes			No
-	const	Block 		No			No			No	
+
+Variable Hoisting
+  which moves variables and function declarations to the top of their scope before code is executed
+  Variable assignments -> function declarations -> variable declarations
+  var, let, const
+    Keyword	Scope		  Hoisting	Reassigned	Redeclared
+    var		  Function	Yes			  Yes			    Yes
+    let		  Block 		No			  Yes			    No
+    const	  Block 		No			  No			    No	
+
 window
+
 strict mode 3 methods
 	detele a global variable not allowed
-primitive datastype
+
+primitive datatype
 	-String 
 	-Boolean 
 	-Number 
@@ -33,7 +39,11 @@ map and set in es6
 	A Set is a special type collection – “set of values” (without keys), where each value may occur only once.
 
 curry fns
-closures
+
+Closures
+  a closure provides access to the outer scope from the function’s inner scope. A closure controls what is and what is not in the scope of a certain function
+  It can be used in event handlers, callbacks, currying
+  closures are often used for object data privacy.
 callback, promise, asycn await
 Promise.allSettled() vs Promise.all()
 shims vs polyfills
