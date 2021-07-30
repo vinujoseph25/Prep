@@ -24,3 +24,5 @@ api performance
 	gzip
 	promise
 	spliting
+
+ACID, CAP, and SOLID patterns

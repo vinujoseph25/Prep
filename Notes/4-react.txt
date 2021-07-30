@@ -303,3 +303,6 @@ Hooks
 
 
 Design Principles of react https://reactjs.org/docs/design-principles.html
+
+What is the concept of keys in React, and why cannot we use indexes of the map as keys for dynamic lists?
+	If we used map indexes as keys for dynamic lists, then the entire list would be rerendered once a change in a single element occurred.
