@@ -52,3 +52,19 @@ z-index
 let var
 closure
 Closure gives access to an outer fn's scope from the inner fn. 
+
+
+Semantic Elements in HTML
+	<article>
+	<aside>
+	<details>
+	<figcaption>
+	<figure>
+	<footer>
+	<header>
+	<main>
+	<mark>
+	<nav>
+	<section>
+	<summary>
+	<time>

@@ -14,12 +14,13 @@ ES6 vs ES5
 
 Variable Hoisting
   which moves variables and function declarations to the top of their scope before code is executed
+  function declarations (function foo(){}) are Hoisted not function expressions (var foo = function (){})
   Variable assignments -> function declarations -> variable declarations
   var, let, const
-    Keyword	Scope		  Hoisting	Reassigned	Redeclared
-    var		  Function	Yes			  Yes			    Yes
-    let		  Block 		No			  Yes			    No
-    const	  Block 		No			  No			    No	
+    Keyword		Scope		  Hoisting	Reassigned	Redeclared
+    var		  	Function		Yes			 Yes		Yes
+    let		  	Block 			No			 Yes		No
+    const	  	Block 			No			 No			No	
 
 window
 
@@ -48,6 +49,8 @@ Closures
   It can be used in event handlers, callbacks, currying
   closures are often used for object data privacy.
 
+  Stale Closures
+
 callback, promise, asycn await
 Promise.allSettled() vs Promise.all()
 
@@ -62,7 +65,57 @@ prototype Inheritance vs Inheritance
 complexity of a sorting algorithm
 	O(1) — constant complexity - Algorithms with Constant Time Complexity take a constant amount of time to run, independently of the size of n
 	O(log n) — logarithmic complexity (for example, binary search),
-  O(n) — linear complexity (for example, maximum element search algorithm),
-  O(nlogn) — linear logarithmic complexity (for example, maximum element search algorithm),
+	O(n) — linear complexity (for example, maximum element search algorithm),
+	O(nlogn) — linear logarithmic complexity (for example, maximum element search algorithm),
 	O (n^2) — square complexity (for example, insertion sort).
 	O (2^n) — Exponential Time Complexity (for example, insertion sort).
+
+
+Events (3 pahses)
+    Capturing phase – the event goes down to the element.
+    Target phase – the event reached the target element.
+    Bubbling phase – the event bubbles up from the element.
+    There are two possible values of the capture options : 
+        If it’s false (default), then the handler is set on the bubbling phase. : ele.addEventListener("click", e => alert());
+        If it’s true, then the handler is set on the capturing phase.           : ele.addEventListener("click", e => alert(), true);
+
+    Bubbling : events triggered : child->parent->ancestors
+    stopPropagation  : stop Bubbling of upper scope
+    stopImmediatePropagation  : stop Bubbling of current element if same el has many event handlers 
+    preventDefault : prevents the default actions of the browser evenets (mouse, keyboard, form, css, dom) and 
+    wants some custom things to happen (validations on text fields, UPPERCASES not allowed, onclick of a checkbox)
+
+JS Timer Functions
+	setTimeout(function, milliseconds)	-> called once after the timeout
+	var x = setInterval(function, milliseconds)  -> clearTimeout(x)  -> called repeatedly after the timeout and stopped by clearTimeout()
+
+Advance JS
+Variables, values, types
+Primitive types
+prototypes
+reference
+Operators
+Functions
+Scope
+Objects
+this
+Arrays
+Conditionals
+Loops
+Callbacks
+Promises
+Async / await
+Recursion
+Hoisting
+Closures
+ES Modules
+Errors and exceptions
+Debugging
+JSON
+Functional programming
+Regular expressions
+Working with the DOM
+Client-side Storage
+Network programming in the browser
+Web Workers and Service Workers
+Websockets

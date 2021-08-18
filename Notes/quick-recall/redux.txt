@@ -1,0 +1,9 @@
+React
+Context API vs Redux
+Redux Store
+Actions
+Action creators
+Reducers
+Control Flow in Redux
+Under the hood  : Connect, mapStateToProps, mapDispatchToProps
+why new object from reducer rather modify it and return

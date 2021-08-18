@@ -69,14 +69,18 @@ PureComponent
 works like -> returns (!ShallowComparison(oldProps,NewProps) || !ShallowComparison(oldState,NewState))
 
 Controlled vs Uncontrolled Components
--Controlled	:	Takes current value through props and notifies changes through callbacks like onChange
-				Form element whose value is controlled by React.
-				Every state mutation will have an associated handler fns / Callback fns.
-				Helps to modify or validate user input.
--Uncontrolled :	Form elements controlled by DOM
-				Updation/changing is not controlled, only after submit
-				Stores its own state internally, and you query the DOM using a ref to find its current value when you need it.
-				This is a bit more like traditional HTML
+-Controlled	:	
+	Takes current value through props and notifies changes through callbacks like onChange
+	Form element whose value is controlled by React.
+	Every state mutation will have an associated handler fns / Callback fns.
+	Helps to modify or validate user input.
+
+-Uncontrolled :	
+	Form elements controlled by DOM
+	not bound to any data
+	Updation/changing is not controlled, only after submit
+	Stores its own state internally, and you query the DOM using a ref to find its current value when you need it.
+	This is a bit more like traditional HTML
 
 Virtual-DOM vs Dirty checking
 -Dirty Check : Dirty checking slower than observables
@@ -124,16 +128,17 @@ Optimizing without create-react-app
 Hooks : Are used to create functional cmp that uses state and LifeCycle methods.
 https://i.stack.imgur.com/7q1jC.jpg
 https://reactjs.org/docs/react-api.html
--useState : const [age, setAge] = useState(0); : 1st arg is the state & 2ns arg is the fn to setState
--useState : const [age, setAge] = useState(()=>0); Lazy initial state either a value as arg or fn which returns a value, if the arg is a fn then it gets called only once.
+-useState : 
+	const [age, setAge] = useState(0); : 1st arg is the state & 2ns arg is the fn to setState
+	const [age, setAge] = useState(()=>0); Lazy initial state either a value as arg or fn which returns a value, if the arg is a fn then it gets called only once.
 	const [age, setAge] = useState(callSomeFnForValue()); vs const [age, setAge] = useState(callSomeFnForValue); 1st one is a value as arg and 2nd is a fn as arg
--useEffect	: LifeCycle methods :  
-			useEffect(() => { }); for mount and update phase	Similar to componentDidMount and componentDidUpdate:
-			useEffect(() => { }, []); empty [] for mount phase, to run it only once
-			useEffect(() => { }, [state]); for changes of state.
-			useEffect(() => { return ()=>{ dummyFn(); } }, []); dummyFn() will be called before unMounting
-			useEffect(() => { return ()=>{ dummyFn(); } }, [variable]); dummyFn() will be called before updating the UI coz of variable
-			useEffect(() => { return ()=>{ dummyFn(); } }); dummyFn() will be called before updating for all UI changes
+-useEffect	:  
+	useEffect(() => { }); for mount and update phase	Similar to componentDidMount + componentDidUpdate:
+	useEffect(() => { }, []); empty [] for mount phase, to run it only once
+	useEffect(() => { }, [state]); for changes of state.
+	useEffect(() => { return ()=>{ dummyFn(); } }, []); dummyFn() will be called before unMounting
+	useEffect(() => { return ()=>{ dummyFn(); } }, [variable]); dummyFn() will be called before updating the UI coz of variable
+	useEffect(() => { return ()=>{ dummyFn(); } }); dummyFn() will be called before updating for all UI changes
 -useSelector	: get value from store : const age = useSelector(state => state.age);
 -useDispatch	: to dispatch actions to the reducer : const dispatch = useDispatch();
 
@@ -154,6 +159,7 @@ Additional Hooks
 	useCallback
 	useMemo
 	useRef
+
 	useImperativeHandle
 	useLayoutEffect
 	useDebugValue
@@ -206,10 +212,10 @@ Context Api
 Initialize the Context
 	const currentContext = React.createContext();
 Create the Provider and assign value to it.
-	const { Provider } = currentContext; Place wer the data lives, enclose the main in <Provider value={obj}></Provider>
+	const { Provider } = currentContext; Place wer the data lives, enclose the main in <Provider value={{name: "John"}}></Provider>
 Get the context usgin useContext hooks Used in place wer data need to be accessed,
-		const contextData = useContext(userDetailContext);
-		<SomeComponent>{contextData.someValue}</SomeComponent>
+		const contextData = useContext(currentContext);
+		<SomeComponent>{contextData.name}</SomeComponent>
 
 
 Enzyme
@@ -219,40 +225,6 @@ React Native vs React
 -React Native is a mobile framework that compiles to native app components, allowing us to build native mobile applications in JS.
 -React is a JavaScript library, supporting both front end web and being run on the server.
 
-Redux
--Is a predictable state container for JavaScript apps. (Actions,Reducer,Store)
--createStore(x) : x is the Reducer
--ACTION :	App dispatches actions to update the state with/without payloads.
-			store.dispatch()
--REDUCER: 	Reducer returns a fresh instance of the state
-			Specify how the application’s state changes in response to actions sent to the store
-			Takes 2 arguments : State & Action
--STORE	:	Store notifies the app and re-render accordingly.
-			Allows access to state via getState()
-			Allows state to be updated via dispatch(action)
-			Registers listeners via subscribe(listener)
--Alternative of Redux : MobX(new), RxJS (Reactive Extensions for JavaScript)
--Built in PubSub pattern
-
-**Redux in React 4 steps**
-	create a reducer
-		const combineReducer = combineReducers({rA: reducerA,rB: reducerB});   //multiple reducers
-	create a store
-		const store = createStore(combineReducer, preloadedState,applyMiddleware(middleware));
-	Wrap the app within the Provider from redux	
-		<Provider store={store}><App /></Provider>
-	Connect the compoent to redux using connect() HOC
-		Container = connect(mapStateToProps, mapDispatchToProps)(Component);	
-
-**Middleware**
-const store = createStore(reducer, applyMiddleware(thunk));
-
-Redux Thunk
--Action creators that return a function instead of an action
--To handle the asyncronous dispatching of actions(asyncronous api calls).
--Inner function receives the store methods 'dispatch' & 'getState' as parameters.
--applyMiddleware(thunk) is used
-
 import {  BrowserRouter as Router,  Switch,  Route,  Link } from "react-router-dom";
 React router
 	<Router>
@@ -261,12 +233,14 @@ React router
 
 paginations, any packages used
 increase performance
-	windowing,
-	lazy loading,
+	Virtualize using react window,
+	Fragments
+	Suspense and lazy loading,
+	React Memo
 	code spliting, Route-based code splitting
 	mfe
 	bundle size
-performance check -  profiler, memory leaks
+	performance check -  profiler, memory leaks
 screen freezing issues and react window
 pure fns, fn components
 deepclone and immmutable helpers
@@ -279,6 +253,14 @@ react fiber -> incremental rendering
 		Return multiple elements from render : With this new feature in React v16.0 now we can also return an array of elements, and string from component’s render method.
 		Portals : Portals provide a first-class way to render children into a DOM node that exists outside the DOM hierarchy of the parent component.
 		Fragments : A common pattern in React is for a component to return multiple elements. Fragments let you group a list of children without adding extra nodes to the DOM.
+
+Fiber Def (vs Stack)
+	Asynchronous
+	splits work into chunks and prioritize the tasks
+	pause work and come back to it later
+	reuse the work or abort if not needed
+	2 phases render(asynchronous) and commit (synchronous)
+
 SSR
 cros issues, fix
 react router
@@ -306,3 +288,11 @@ Design Principles of react https://reactjs.org/docs/design-principles.html
 
 What is the concept of keys in React, and why cannot we use indexes of the map as keys for dynamic lists?
 	If we used map indexes as keys for dynamic lists, then the entire list would be rerendered once a change in a single element occurred.
+
+Constructor vs getInitialState in React
+	The difference between constructor and getInitialState is the difference between ES6 and ES5 itself.
+	You should initialize state in the constructor when using ES6 classes, and define the getInitialState method when using React.createClass.
+
+When to pass props in Super() in Constructor
+	The only one reason when one needs to pass props to super() is when you want to access this.props in Constructor
+	In render it makes no difference

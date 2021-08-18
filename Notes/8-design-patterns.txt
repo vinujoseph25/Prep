@@ -2,10 +2,10 @@ observables
 
 React Patterns
     Common props
-    State machine
     Compound component
     Render props
     Higher order compoents
+    Hooks
     Context API
     Presentational and Container Components
 

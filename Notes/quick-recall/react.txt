@@ -1,0 +1,9 @@
+version
+pros & cons
+render list - significance of keys
+Class Component LC Methods
+Context API
+Hooks
+Optimization : PureComponent, Memo, useCallback, useMemo
+Logic sharing : HOC, Render Props, Custom hooks with egs
+Packages : Styling, Routing, Form Handling, State Management, CRA
