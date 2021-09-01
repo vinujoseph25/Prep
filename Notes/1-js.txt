@@ -89,6 +89,14 @@ JS Timer Functions
 	setTimeout(function, milliseconds)	-> called once after the timeout
 	var x = setInterval(function, milliseconds)  -> clearTimeout(x)  -> called repeatedly after the timeout and stopped by clearTimeout()
 
+Events
+  const myEmitter = new events.EventEmitter();
+  myEmitter.on('message')
+  emiters
+  myEmitter.emit('message')
+  process.on("uncaughtException", (err) => { });
+
+
 Advance JS
 Variables, values, types
 Primitive types
