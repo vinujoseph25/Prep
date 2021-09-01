@@ -1,5 +1,11 @@
-"use strict";   
-var g = 10;
+"use strict";     //when strict used, the global object this is not available in a function () without explicit context
+function printThis() {
+  console.log(this);
+}
+
+printThis();
+this.g = 10;
+this.age = 10;
 const person = {
   age: 19,
   regularFn() {
@@ -17,6 +23,13 @@ const person = {
   },
 };
 
+const a = {
+  age: 10,
+};
+const b = {
+  age: 15,
+};
+
 function regularFn1(msg) {
   console.log("age:", this.age, msg);
 }
@@ -28,11 +41,18 @@ function regularFn3() {
 }
 
 regularFn1.call(person, "old");
+regularFn1("old");
 regularFn2.apply(person, ["old", "young"]);
 const regularFn4 = regularFn3.bind(this);
 const regularFn5 = regularFn3.bind(person);
 regularFn4();
 regularFn5();
 console.log(this.g);
-// delete this.g;
+delete this.g;
 console.log(this.g);
+
+
+const bindedRegularFn = regularFn3.bind(a);
+bindedRegularFn();
+const bindedRegularFn2 = bindedRegularFn.bind(b);  // bindedRegularFn will have only the obj a binded
+bindedRegularFn2();
