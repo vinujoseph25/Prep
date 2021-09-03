@@ -7,23 +7,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <!-- <link rel='stylesheet' type='text/css' media='screen' href='main.css'> -->
     <script>
-      function myFunction1() {
-        (() => {
-          alert("I am an IIFE!");
-        })();
-      }
-      function myFunction2() {
-        (function() {
-            alert("I am an IIFE!");
-        }());
-      }
+      // function myFunction1() {
+        // (() => {
+        //   alert("I am an IIFE!");
+        // })();
+      // }
+      // function myFunction2() {
+      //   (function() {
+      //       alert("I am an IIFE!");
+      //   }());
+      // }
     </script>
-    <!-- <script src='test/self-funtions.js'></script> -->
-    <!-- <script src='check.js'></script> -->
+    <script src='js-files/promise.js'></script>
   </head>
 
   <body>
-    <button onclick="myFunction1()">click</button>
-    <button onclick="myFunction2()">click</button>
+    <button onclick="asyncCall()">click me</button>
   </body>
 </html>

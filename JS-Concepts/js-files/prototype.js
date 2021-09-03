@@ -29,13 +29,3 @@ Object.prototype.getLength = function () {
 Object.prototype.length = Object.keys(this).length;
 console.log("this", obj.getLength());
 console.log("this", obj.length);
-
-Array.prototype.forAll = function (callback) {
-  for (i = 0; i < this.length; i++) {
-    callback(this[i], i);
-  }
-};
-
-ar.forAll((a, i) => {
-  console.log("a :>> ", a, i);
-});
