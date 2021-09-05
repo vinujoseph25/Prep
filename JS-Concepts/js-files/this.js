@@ -39,9 +39,10 @@ class bike {
   }
 }
 
-const r15 = new bike('r15');
+const r15 = new bike("r15");
 r15.printName();
 // ***************************
+var name = "Joemon";
 this.name = "Joseph";
 const obj = {
   name: "Vinu",
@@ -96,3 +97,21 @@ const obj = {
 obj.walk();
 console.log("***** :>> ");
 obj.talk();
+
+function onclickFn() {
+  const person = {
+    name: "Vinu",
+  };
+  function printName(age) {
+    console.log("this.name :>> ", this.name, age);
+  }
+
+  function myBind(fn, context) {
+    return function () {
+      fn.apply(context, [...arguments]);
+    };
+  }
+
+  const bindedFn = myBind(printName, person);
+  bindedFn(30);
+}

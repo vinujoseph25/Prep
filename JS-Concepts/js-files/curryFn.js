@@ -1,28 +1,44 @@
-function multiply(a) {
-  return (b) => {
-    return (c) => {
-      return a * b * c;
-    };
+function sum(...arg) {
+  return arg.reduce((acc, element) => acc + element, 0);
+}
+
+function multiply(...arg) {
+  return arg.reduce((acc, element) => acc * element, 1);
+}
+
+function curry(callback) {
+  const paramsArray = [];
+  return function recursiveFunction(...params) {
+    if (params && params.length > 0) {
+      paramsArray.push(...params);
+      return recursiveFunction;
+    } else {
+      return callback(...paramsArray);
+    }
   };
 }
 
-//Currying
-function volume(w) {
-  return function(h) {
-    return function(l) {
-      return w * h* l;
-    }
-  }
+function logging(date, type, message) {
+  console.log(`--${date},${type},${message}--`);
 }
 
-volume(4)(6)(3); // 72
+function curriedLogging(callback) {
+  return function (a) {
+    return function (b) {
+      return function (c) {
+        return callback(a, b, c);
+      };
+    };
+  };
+}
+const logNow = curriedLogging(logging)(new Date());
+const logError = logNow("error");
+const logWarning = logNow("warning");
+const logInfo = logNow("info");
 
-
-function myFunction() {
-  const value1 = multiply(1)(2)(3);
-//   const multiply1 = multiply(1);
-//   const multiply2 = multiply1(2);
-//   const value2 = multiply2(3);
-  console.log("value 1 >>", value1);
-//   console.log("value 2 >>", value2);
+function onclickFn() {
+  const curriedSum = curry(sum);
+  const result = curriedSum(1, 2, 3)(4)(5, 6)();
+  console.log("result :>> ", result);
+  // logInfo('test message')
 }

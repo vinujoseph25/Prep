@@ -1,27 +1,3 @@
-This, Bind, Call, and Apply in JavaScript
-	Call invokes the function and allows you to pass in arguments one by one.
-	Apply invokes the function and allows you to pass in arguments as an array.
-	Bind returns a new function, allowing you to pass in a this array and any number of arguments
-	D:\Personal\POC\Js\JS-Concepts\test\call-apply-bind.js
-
-es6 features
-	arrow fns vs regular fns see egs D:\Personal\POC\Js\JS-Concepts\test\arrowfn.js
-ES6 vs ES5
-  -Arrow fns			:	Reduces the code, 'this' references to class parameter  than the instance, high performanance
-  -Objects manupulation :	Spread operator, Object defining & destructing
-  -Callbacks			:	Promise : resolves->then block. rejects->catch block.
-  -Export&Imports		:	Morw readability	  
-
-Variable Hoisting
-  which moves variables and function declarations to the top of their scope before code is executed
-  function declarations (function foo(){}) are Hoisted not function expressions (var foo = function (){})
-  Variable assignments -> function declarations -> variable declarations
-  var, let, const
-    Keyword		Scope		  Hoisting	Reassigned	Redeclared
-    var		  	Function		Yes			 Yes		Yes
-    let		  	Block 			No			 Yes		No
-    const	  	Block 			No			 No			No	
-
 window
 
 strict mode 3 methods
@@ -40,16 +16,67 @@ map and set in es6
 	Map is a collection of keyed data items, just like an Object. But the main difference is that Map allows keys of any type.
 	A Set is a special type collection – “set of values” (without keys), where each value may occur only once.
 
-curry fns
-  Currying is a technique of evaluating function with multiple arguments, into sequence of functions with single argument.
-  In other words, when a function, instead of taking all arguments at one time, takes the first one and return a new function that takes the other args
+Variable Hoisting
+  which moves variables and function declarations to the top of their scope before code is executed
+  function declarations (function foo(){}) are Hoisted not function expressions (var foo = function (){})
+  Variable assignments -> function declarations -> variable declarations
+  In var variable declarations are only hoisted, not the initialization
+  var, let, const
+    Keyword		Scope		  Hoisting	Reassigned	Redeclared
+    var		  	Function		Yes			 Yes		Yes
+    let		  	Block 			No			 Yes		No
+    const	  	Block 			No			 No			No
 
 Closures
-  a closure provides access to the outer scope from the function’s inner scope. A closure controls what is and what is not in the scope of a certain function
-  It can be used in event handlers, callbacks, currying
-  closures are often used for object data privacy.
+  created when a function returns a new function-> (function bundled with its lexcial scope ) is called closure
+  a closure provides access to the outer scope from the function’s inner scope.
+  A closure controls what is and what is not in the scope of a certain function
+  multiple closures of the same function has separate persistent memories
+  **Usage**
+  -event handlers, callbacks, currying, promises
+  -memoization
+  -object data privacy
+  -throttle and debounce functionality
+  **Not to be used**
+  -closures in loops
+  -Stale Closures in react UseEffect
 
-  Stale Closures
+Fn Currying
+  Currying is a technique of transforming a function with multiple arguments, into sequence of nesting functions with single argument at a time.
+  In other words, when a function, instead of taking all arguments at one time, takes the first one and return a new function that takes the other args
+  **Practical Use**
+  -to create utility functions eg logging func(date,type,msg) -> user doesn't have to bother about passing date and type
+    create different curried fns for error, warn, info : func(date,type,msg) -> logError(msg) or logInfo(msg)
+
+This
+  execution context for a function call
+  depends on the way a function is called, this is the rule determining the this Keyword
+  4 ways to call a fns
+  -implicit binding (object if called object.fn())
+  -explicit binding (Bind, Call, and Apply)
+  -new binding (this references to an empty object)
+  -default (global scope)
+  order of precedence : new>explicit>implicit>default
+
+Bind, Call, and Apply in JavaScript
+	Call invokes the function and allows you to pass in arguments one by one.
+	Apply invokes the function and allows you to pass in arguments as an array.
+	Bind returns a new function, allowing you to pass in a this array and any number of arguments
+	D:\Personal\POC\Js\JS-Concepts\test\call-apply-bind.js
+
+new binding
+  constructor function
+  function Person(name){
+    this.name = name;     >> this = {} then this.name = name;
+  } 
+
+es6 features
+	arrow fns vs regular fns see egs D:\Personal\POC\Js\JS-Concepts\test\arrowfn.js
+ES6 vs ES5
+  -Arrow fns			:	Reduces the code, 'this' references to class parameter  than the instance, high performanance
+  -Objects manupulation :	Spread operator, Object defining & destructing
+  -Callbacks			:	Promise : resolves->then block. rejects->catch block.
+  -Export&Imports		:	Morw readability	  
 
 callback, promise, asycn await
 Promise.allSettled() vs Promise.all()

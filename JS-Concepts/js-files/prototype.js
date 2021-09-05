@@ -29,3 +29,10 @@ Object.prototype.getLength = function () {
 Object.prototype.length = Object.keys(this).length;
 console.log("this", obj.getLength());
 console.log("this", obj.length);
+
+Function.prototype.myBind = function (context) {
+  fn = this;
+  return function () {
+    fn.apply(context, [...arguments]);
+  };
+};
