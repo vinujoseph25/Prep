@@ -3,18 +3,19 @@ window
 strict mode 3 methods
 	detele a global variable not allowed
 
-primitive datatype
-	-String 
-	-Boolean 
-	-Number 
-	-Undefined
-	-Null 
-	-Symbol 
-map and set in es6
-	Objects are used for storing keyed collections.
-	Arrays are used for storing ordered collections.
-	Map is a collection of keyed data items, just like an Object. But the main difference is that Map allows keys of any type.
-	A Set is a special type collection – “set of values” (without keys), where each value may occur only once.
+primary data types and reference types 
+  primitive datatype
+    -String 
+    -Boolean 
+    -Number 
+    -Undefined
+    -Null 
+    -Symbol 
+  map and set in es6
+    Objects are used for storing keyed collections.
+    Arrays are used for storing ordered collections.
+    Map is a collection of keyed data items, just like an Object. But the main difference is that Map allows keys of any type.
+    A Set is a special type collection – “set of values” (without keys), where each value may occur only once.
 
 Variable Hoisting
   which moves variables and function declarations to the top of their scope before code is executed
@@ -71,7 +72,14 @@ new binding
   } 
 
 es6 features
+  Advantages of let and const over var
+    Avoid polluting our global object with unnecessary properties.
+    Avoid hidden bugs
+    Avoid unnecessary hoisting
+    Add more restrictions 
+
 	arrow fns vs regular fns see egs D:\Personal\POC\Js\JS-Concepts\test\arrowfn.js
+  Lexical binding
 ES6 vs ES5
   -Arrow fns			:	Reduces the code, 'this' references to class parameter  than the instance, high performanance
   -Objects manupulation :	Spread operator, Object defining & destructing
@@ -80,6 +88,14 @@ ES6 vs ES5
 
 callback, promise, asycn await
 Promise.allSettled() vs Promise.all()
+  +−−−−−−−−−−−−−−−−−−−−+−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−+
+  | name               | description                                     |
+  +−−−−−−−−−−−−−−−−−−−−+−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−+
+  | Promise.allSettled | does not short-circuit                          |
+  | Promise.all        | short-circuits when an input value is rejected  |
+  | Promise.race       | short-circuits when an input value is settled   |
+  | Promise.any        | short-circuits when an input value is fulfilled |
+  +−−−−−−−−−−−−−−−−−−−−+−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−+
 
 shims vs polyfills
 	Shims intercept API calls and create an abstract layer between the caller and the target. Typically shims are used for backward compatibility. 
@@ -88,6 +104,18 @@ shims vs polyfills
 
 Inheritance and the prototype chain
 prototype Inheritance vs Inheritance
+  every fn has a prototype : fn.prototype-> {constructor:f, ...}
+  every fn.prototype.constructor point to the same fn : fn.prototype.constructor-> fn
+  getPrototypeOf(child) returns the prototype of parent obj frm which the child was created
+  child instanceo f parent ->  getPrototypeOf(child) === parent.prototype -> true
+  only the direct properties of the parent is the ownproperty of the child, but the properties of the prototype of the parent is not own properties of the child
+    function Person(name) {   //own property of parent and child who inherits
+      this.name = name;
+      this.age = 30;
+    }
+    Person.prototype.getName = function () {    //own property of parent only
+      return this.name;
+    }; 
 
 complexity of a sorting algorithm
 	O(1) — constant complexity - Algorithms with Constant Time Complexity take a constant amount of time to run, independently of the size of n
@@ -95,7 +123,9 @@ complexity of a sorting algorithm
 	O(n) — linear complexity (for example, maximum element search algorithm),
 	O(nlogn) — linear logarithmic complexity (for example, maximum element search algorithm),
 	O (n^2) — square complexity (for example, insertion sort).
+	O (n^3) — square complexity (for example, insertion sort).
 	O (2^n) — Exponential Time Complexity (for example, insertion sort).
+	O (!n) — Factorial Time Complexity
 
 
 Events (3 pahses)
@@ -123,6 +153,27 @@ Events
   myEmitter.emit('message')
   process.on("uncaughtException", (err) => { });
 
+Proxy object 
+  enables you to create a proxy for another object, which can intercept and redefine fundamental operations for that object.
+eg :
+      const target = {
+        message1: "hello",
+        message2: "everyone"
+      };
+
+      const handler = {
+        get: function (target, prop, receiver) {
+          if (prop === "message2") {
+            return "world";
+          }
+          return Reflect.get(...arguments);
+        },
+      };
+
+      const proxy = new Proxy(target, handler);
+
+      console.log(proxy.message1); // hello
+      console.log(proxy.message2); // world
 
 Advance JS
 Variables, values, types

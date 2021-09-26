@@ -40,10 +40,10 @@ function advancePromise() {
     }, 400);
   });
   const promiseArray = [promise1, promise2];
-  //   Promise.all    -> all promises which are resolved/rejected           => arrray
+  //   Promise.all        -> all promises which are fullfiled (resolved/rejected)           => arrray
   //   Promise.allSettled -> any promise which is resolved/rejected         => arrray
-  //   Promise.any    -> first promise which is either resolved/rejected    => object
-  //   Promise.race   -> first promise which is either resolved/rejected    => object
+  //   Promise.any        -> first promise which is either resolved/rejected    => object
+  //   Promise.race       -> first promise which is resolved or if all promises are rejected    => object
   Promise.any(promiseArray)
     .then((value) => {
       console.log("promise,then :>> ", value);

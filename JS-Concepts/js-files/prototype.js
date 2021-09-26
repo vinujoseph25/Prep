@@ -36,3 +36,31 @@ Function.prototype.myBind = function (context) {
     fn.apply(context, [...arguments]);
   };
 };
+
+function Person(name) {
+  this.name = name;
+  this.age = 30;
+}
+Person.prototype.getName = function () {
+  return this.name;
+};
+const vinu = new Person("vinu");
+vinu.getAge = function () {
+  return this.age;
+};
+console.log("vinu.getName() :>> ", vinu.getName());
+console.log("vinu.getAge() :>> ", vinu.getAge());
+
+for (const key in Person.prototype) {
+  if (Object.hasOwnProperty.call(Person.prototype, key)) {
+    const element = Person.prototype[key];
+    console.log("element :>> ", element);
+  }
+}
+
+for (const key in vinu) {
+  if (Object.hasOwnProperty.call(vinu, key)) {
+    const element = vinu[key];
+    console.log("element :>> ", element);
+  }
+}

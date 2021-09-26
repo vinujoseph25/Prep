@@ -2,7 +2,10 @@ why no import in node js
 db attacks, rate limiting
 maintain sessions
 JWT
-	-parts
+	-parts (header, payload, and signatureJ)
+		header	:the algorithm used to generate the signature.
+		payload	:data {useid,isAdmin}
+		signature: HMACSHA256((encode(header).encode(payload),secret)
 	-making
 ssl
 server cachings 
@@ -26,3 +29,75 @@ api performance
 	spliting
 
 ACID, CAP, and SOLID patterns
+
+
+Event Loop (checks if the stack is empty, takes the 1st task from callback stack)
+	call stack
+	async APIs(timers, extnl API)
+	callback stack (task queue)
+
+Phases of event loops
+	Timers - callbacks of expired timers from setTimeout or setInterval
+	Pending callbacks - executes I/O callbacks deferred to the next loop iteration.
+	Idle handlers (internally) - perform some libuv internal stuff, used internally.
+	Prepare handlers (internally) - perform some prep-work before polling for I/O, used internally.
+	I/O poll - retrieve new I/O events; execute I/O related callbacks.
+	Check handlers - setImmediate() callbacks are invoked here.
+	Close callbacks - execute close handlers, exit of event loop
+
+	timers–>pending callbacks–>idle,prepare–>connections(poll,data,etc)–>check–>close callbacks
+
+process.nextTick() vs setImmediate()
+	setTimeout() is processed in the Check handlers phase
+	process.nextTick() is processed at the starting of the event loop and between each phase of the event loop.
+	process.nextTick() and setImmediate() allows the user to schedule callbacks in the event loop.
+	process.nextTick() is processed after every phase of the event loop
+	setImmediate() is only processed on the check handler phase of the event loop
+
+Commonly used timers
+	setTimeout/clearTimeout – This is used to implement delays in code execution.
+	setInterval/clearInterval – This is used to run a code block multiple times.
+	setImmediate/clearImmediate – This is used to set the execution of the code at the end of the event loop cycle.
+	process.nextTick – This is used to set the execution of code at the beginning of the next event loop cycle
+
+Commonly used midddlewares
+	Body Parser app.use(express.json())
+	Parse encodedURL app.use(express.urlencoded())
+	Cookie Parser app.use(cookieParser)
+	CORS app.use(cors())
+	Logs app.use(morgan('common'))
+	Compression app.use(compression())
+	SSL Support https.createServer(credentials={key,cert},app)
+	Security app.use(helmet())
+	Rate Limit	app.use(limiter)
+	Clustering
+	Custom midddlewares for
+		Authentication
+		404
+		Error handling (common or individual routes)
+		Analytics
+
+document API or Fun
+	/**
+	* @description
+	* @param {string} name desc
+	* @returns
+	*/
+
+If Node.js is single threaded then how does it handle concurrency?
+	The main loop is single-threaded and all async calls are managed by libuv library.
+
+What is node.js streams?
+Streams are objects that enable you to read data or write data continuously.
+	Writable: streams to which data can be written (for example, fs.createWriteStream()).
+	Readable: streams from which data can be read (for example, fs.createReadStream()).
+	Duplex: streams that are both Readable and Writable (for example, net.Socket).
+	Transform: Duplex streams that can modify or transform the data as it is written and read (for example, zlib.createDeflate()).
+
+Stub in Node.js
+	External calls which make tests slow and difficult to write (e.g HTTP calls/ DB calls)
+	Triggering different outcomes for a piece of code (e.g. what happens if an error is thrown/ if it passes)
+
+WASI in Node
+
+Cluster vs Multi-Threading

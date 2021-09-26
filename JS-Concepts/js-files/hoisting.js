@@ -13,5 +13,33 @@ hoist();
 console.log(x);
 console.log(y);
 // console.log(z);
-console.log(typeof z );
-const z=100;
+const z = 100;
+console.log(typeof z);
+
+greeting();
+var greeting = function () {
+  // fn expression
+  console.log("fn expression");
+};
+greeting();
+function greeting() {
+  // fn declartion
+  console.log("fn declartion");
+}
+greeting();
+(function greeting() {
+  console.log("IIFE");
+})();
+greeting();
+!(function () {
+  console.log("Code runs!");
+})();
+(function () {
+  console.log("Code runs!");
+})();
+
+function Person() {
+  this.name = "my name is khan";
+}
+var person1 = Person();
+var person2 = new Person();
